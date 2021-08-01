@@ -1,0 +1,89 @@
+<!-- Form -->
+<div class="container mt-5">
+  <form #myForm='ngForm' (ngSubmit)="addComment(myForm.value);myForm.reset()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        placeholder="Enter Your Name"
+        ngModel
+        #name="ngModel"
+        required
+        minlength="3"
+      />
+      <div class="mt-2 errors" *ngIf="name.invalid && name.touched">
+          <div *ngIf="name.errors?.required"> * Please Enter Your Name *</div>
+          <div *ngIf="name.errors?.minlength"> * Name Minimum Length Is : {{name.errors?.minlength.requiredLength}} *</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        aria-describedby="emailHelp"
+        name="email"
+        placeholder="example@email.com"
+        ngModel
+        #email="ngModel"
+        required
+        email
+      />
+      <div class="mt-2 errors" *ngIf="email.invalid && email.touched">
+        <div *ngIf="email.errors?.required"> * Please Enter Your Email *</div>
+        <div *ngIf="email.errors?.email"> * example@email.com *</div>
+    </div>
+    </div>
+    <div class="mb-3">
+      <label for="body" class="form-label">Body</label>
+      <input
+        type="text"
+        class="form-control"
+        id="body"
+        name="body"
+        placeholder="Enter Your Body"
+        ngModel
+        #body="ngModel"
+        required
+        minlength="10"
+      />
+      <div class="mt-2 errors" *ngIf="body.invalid && body.touched">
+        <div *ngIf="body.errors?.required"> * Please Enter Your Body *</div>
+        <div *ngIf="body.errors?.minlength"> * Body Minimum Length Is : {{body.errors?.minlength.requiredLength}}</div>
+    </div>
+    </div>
+    <button type="submit" class="btn btn-secondary btnAddMouse" [disabled]="myForm.invalid">Add New</button>
+  </form>
+</div>
+<!-- Table -->
+<div class="container mt-5 mb-4">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Body</th>
+        <th scope="col">Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let comment of comments">
+        <td>{{ comment.name }}</td>
+        <td>{{ comment.email }}</td>
+        <td>{{ comment.body }}</td>
+        <td>
+            <a routerLink="/comments/{{comment.id}}">
+                <button class="btn btn-secondary">Update</button>
+            </a>
+        </td>
+        <td>
+                <button class="btn btn-secondary btnDeleteMouse" (click)="deleteComment(comment)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

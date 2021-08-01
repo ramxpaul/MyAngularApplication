@@ -1,0 +1,64 @@
+
+<div class="container mt-5">
+    <form #myForm='ngForm' (ngSubmit)="updateComments(myForm.value);myForm.reset()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          placeholder="Enter Your Name"
+          ngModel
+          #name="ngModel"
+          required
+          minlength="3"
+          [(ngModel)]='comment.name'
+        />
+        <div class="mt-2 errors" *ngIf="name.invalid && name.touched">
+            <div *ngIf="name.errors?.required"> * Please Enter Your Name *</div>
+            <div *ngIf="name.errors?.minlength"> * Name Minimum Length Is : {{name.errors?.minlength.requiredLength}} *</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          aria-describedby="emailHelp"
+          name="email"
+          placeholder="example@email.com"
+          ngModel
+          #email="ngModel"
+          required
+          email
+          [(ngModel)]="comment.email"
+        />
+        <div class="mt-2 errors" *ngIf="email.invalid && email.touched">
+            <div *ngIf="email.errors?.required"> * Please Enter Your Email *</div>
+            <div *ngIf="email.errors?.email"> * example@email.com *</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="body" class="form-label">Body</label>
+        <input
+          type="text"
+          class="form-control"
+          id="body"
+          name="body"
+          placeholder="Enter Your Body"
+          ngModel
+          #body="ngModel"
+          required
+          minlength="10"
+          [(ngModel)]="comment.body"
+        />
+        <div *ngIf="body.invalid && body.touched" class="errors">
+            <div *ngIf="body.errors?.required">* Please Insert Your Body *</div>
+            <div *ngIf="body.errors?.minlength">* Body Minimum Length IS : {{body.errors?.minlength.requiredLength}}</div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-secondary mb-5" [disabled]='myForm.invalid'>Submit</button>
+    </form>
+  </div>

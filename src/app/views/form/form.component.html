@@ -1,0 +1,129 @@
+   <div class="container mt-5">
+      <form #contactForm='ngForm' (ngSubmit)='onSubmit(contactForm.value); contactForm.reset()'>
+        <!-- inputs -->
+        <div class="mb-3">
+          <label for="firstname" class="form-label">First Name </label>
+          <input
+            type="text"
+            ngModel
+            name="firstname"
+            #firstname="ngModel"
+            class="form-control"
+            id="firstname"
+            placeholder="Enter Your First Name"
+            required
+            minlength="3"
+          />
+          <div class="errors d-flex mt-1" *ngIf='firstname.touched && firstname.invalid'>
+              <div *ngIf='firstname.errors?.required'>* First Name Is Required *</div>
+              <div *ngIf='firstname.errors?.minlength'>* First Name Minimum Length Is : {{firstname.errors?.minlength.requiredLength}} *</div>
+
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="lastname" class="form-label">Last Name </label>
+          <input
+            type="text"
+            class="form-control"
+            ngModel
+            name="lastname"
+            #lastname="ngModel"
+            id="lastname"
+            placeholder="Enter Your Last Name"
+            required
+            minlength="3"
+          />
+          <div class="errors d-flex mt-1" *ngIf='lastname.touched && lastname.invalid'>
+            <div *ngIf='lastname.errors?.required'>* Last Name Is Required *</div>
+            <div *ngIf='lastname.errors?.minlength'>* Last Name Minimum Length Is : {{lastname.errors?.minlength.requiredLength}} *</div>
+        </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            ngModel
+            name="email"
+            #email="ngModel"
+            id="email"
+            aria-describedby="emailHelp"
+            placeholder="name@example.com"
+            required
+            email
+          />
+          <div class="errors d-flex mt-1" *ngIf='email.touched && email.invalid'>
+            <div *ngIf='email.errors?.required'>* Email Is Required *</div>
+            <div *ngIf='email.errors?.email'>* Example : name@example.com *</div>
+
+        </div>
+        </div>
+        <!-- radio buttons-->
+        <div class="row ms-1">
+          <div class="form-check col-1">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="radiomale"
+              value="male"
+              ngModel
+              required
+              #male="ngModel"
+            />
+            <label class="form-check-label" for="radiomale">
+              Male
+            </label>
+          </div>
+
+          <div class="form-check col-1">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="radiofemale"
+              value="female"
+              ngModel
+              required
+              #female="ngModel"
+            />
+            <label class="form-check-label" for="radiofemale">
+              Female
+            </label>
+          </div>
+        </div>
+        <!-- check box -->
+        <div class="mb-3 form-check mt-3 ms-1">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="ismarried"
+            name="ismarried"
+            value="false"
+            ngModel
+            #ismarried="ngModel"
+          />
+          <label class="form-check-label" for="ismarried">Is Married</label>
+        </div>
+        <!-- select -->
+        <div class="mt-5 ">
+          <select
+            class="form-select"
+            required
+            name="country"
+            ngModel
+            #country='ngModel'
+            value="Egypt"
+          >
+            <!-- <option selected>Select Yout Country</option> -->
+            <option selected *ngFor="let country of countries">{{country.name}}</option>
+          </select>
+          <div class="errors d-flex mt-1" *ngIf='country.touched && country.invalid'>
+            <div *ngIf='country.errors?.required'>* Please Select Country *</div>
+        </div>
+        </div>
+        <button type="submit" class="btn btn-secondary mt-5 mb-5" [disabled]='contactForm.invalid'>Submit</button>
+      </form>
+    </div>

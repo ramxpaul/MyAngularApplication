@@ -1,0 +1,15 @@
+.errors{
+    color: red;
+}
+
+.form-control.ng-invalid.ng-touched{
+    border-color: red;
+}
+
+.btnDeleteMouse:hover{
+    cursor: no-drop;
+}
+
+.btnAddMouse:hover{
+    cursor: cell;
+}
